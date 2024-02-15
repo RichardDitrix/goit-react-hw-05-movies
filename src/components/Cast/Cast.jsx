@@ -1,39 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCastById } from 'services/api';
+import { useFetchCastById } from 'hooks/useFetchCastById';
+import { Spinner } from 'components/Spinner/Spinner';
+import { STATUS } from 'utils/status';
+
 import { Image, List } from './Cast.styled';
 import UnknowPerson from 'images/unknown-person.jpg';
-import { Spinner } from 'components/Spinner/Spinner';
 
-export const STATUS = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
-
-export const useFetchCastById = id => {
-  const [cast, setCast] = useState([]);
-  const [status, setStatus] = useState(STATUS.IDLE);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchCast() {
-      setStatus(STATUS.PENDING);
-      try {
-        const cast = await getCastById(id);
-        setCast(cast);
-        setStatus(STATUS.RESOLVED);
-      } catch (error) {
-        setError(error);
-        setStatus(STATUS.REJECTED);
-      }
-    }
-    fetchCast();
-  }, [id]);
-
-  return { cast, status, error };
-};
 const Cast = () => {
   const { movieId } = useParams();
   const { cast, status, error } = useFetchCastById(movieId);

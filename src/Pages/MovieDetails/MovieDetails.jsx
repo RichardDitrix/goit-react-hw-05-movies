@@ -1,46 +1,16 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieById } from 'services/api';
-
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
-import NotFoundPage from 'Pages/NotFoundPage';
 import { Spinner } from 'components/Spinner';
+import NotFoundPage from 'pages/NotFoundPage';
+import { STATUS } from 'utils/status';
+import { useFetchMovieById } from 'hooks/useFetchMovieById';
 import {
   BaseInformation,
   ButtonBack,
   Description,
   Image,
 } from './MovieDetails.styled';
-
-export const STATUS = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
-
-export const useFetchMovieById = id => {
-  const [movie, setMovie] = useState([]);
-  const [status, setStatus] = useState(STATUS.IDLE);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchMovies() {
-      setStatus(STATUS.PENDING);
-      try {
-        const movie = await getMovieById(id);
-        setMovie(movie);
-        setStatus(STATUS.RESOLVED);
-      } catch (error) {
-        setError(error);
-        setStatus(STATUS.REJECTED);
-      }
-    }
-    fetchMovies();
-  }, [id]);
-
-  return { movie, status, error };
-};
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -81,6 +51,7 @@ const MovieDetails = () => {
               <p>{genres.map(({ name }) => name).join(', ')}</p>
             </Description>
           </BaseInformation>
+
           <hr />
           <h3>Additional information</h3>
           <ul>
@@ -95,6 +66,7 @@ const MovieDetails = () => {
               </Link>
             </li>
           </ul>
+
           <hr />
           <Suspense fallback={<Spinner />}>
             <Outlet />
