@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgoit_react_hw_05_movies=self.webpackChunkgoit_react_hw_05_movies||[]).push([[660],{2660:(e,n,t)=>{t.r(n),t.d(n,{default:()=>a});var c,s=t(4312);const i=t(6880).cp.h1(c||(c=(0,s.c)(["\n  height: 100%;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));var r=t(2496);const a=()=>(0,r.jsx)(i,{children:"Sorry. Page not found"})}}]);
-//# sourceMappingURL=660.e90e6624.chunk.js.map
