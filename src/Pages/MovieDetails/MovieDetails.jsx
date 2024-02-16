@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { Spinner } from 'components/Spinner';
-import NotFoundPage from 'pages/NotFoundPage';
+import NotFoundPage from 'Pages/NotFoundPage';
 import { STATUS } from 'utils/status';
 import { useFetchMovieById } from 'hooks/useFetchMovieById';
 import {
